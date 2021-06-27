@@ -1,0 +1,17 @@
+---
+vms:
+  - name: test1-ansible
+    folder: ansible
+    cpus: 1
+    sockets: 1
+    memory: 64
+    disksize: 1
+    disktype: thin
+
+  - name: test2-ansible
+    folder: ansible
+    cpus: 1
+    sockets: 1
+    memory: 64
+    disksize: 64
+    disktype: thin

@@ -1,0 +1,35 @@
+--- 
+- name: deploy vms
+  hosts: localhost
+  vars_files:
+    - secrets.yml
+    - vms.yml
+  vars:
+    datastore_name: datastore
+    template_name: ansible-template
+    datacenter_name: datacenter-name
+    cluster_name: cluster-name
+  tasks:
+    - name: deploy vm on esxi host
+      vmware_guest:
+        hostname: "{{ credentials.hostname }}"
+        username: "{{ credentials.username }}"
+        password: "{{ credentials.password }}"
+        validate_certs: false
+        template: "{{ template_name }}"
+        datacenter: "{{ datacenter_name }}"
+        cluster: "{{ cluster_name }}"
+        name: "{{ item.name }}"
+        folder: "{{ item.folder }}"
+        hardware:
+           num_cpus: "{{ item.cpus }}"
+           num_cpu_cores_per_socket: "{{ item.sockets }}"
+           memory_mb: "{{ item.memory }}"
+           scsi: paravirtual
+        disk:
+          - size_gb: "{{ item.disksize }}"
+            type: "{{ item.disktype }}"
+            datastore: "{{ datastore_name }}"
+        state: poweredoff
+      loop: "{{ vms }}"
+
