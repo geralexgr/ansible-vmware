@@ -1,5 +1,5 @@
 # Ansible-VMware
-> An ansible project which automates the virtual machines deployment procedure
+> An ansible project which automates the virtual machines deployment procedure on VMware environments
 
 ## v1.0 features
 
